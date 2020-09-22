@@ -1,0 +1,2 @@
+Login then | sudo podman login docker.io  | username anandpavithran81
+sudo skopeo copy containers-storage:quay.io/anandpavithran/infosys:1.0 docker://docker.io/anandpavithran81/infosys:1.0
