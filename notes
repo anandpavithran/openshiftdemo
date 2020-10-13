@@ -1,3 +1,88 @@
 Login then | sudo podman login docker.io  | username anandpavithran81
 sudo skopeo copy containers-storage:quay.io/anandpavithran/infosys:1.0 docker://docker.io/anandpavithran81/infosys:1.0
 skopeo copy  docker-archive:php-70-rhel7-newer.tar.gz  docker://quay.io/anandpavithran/php-70-rhel7:latest
+
+Chapter-2 
+Demo of Dockerfile instructon-ONBUILD -Work only with one ONBUILD instruction given in last of file.
+
+Example: . at LAST ALWAYS
+sudo podman image build --no-cache --layers=false --format docker -t children:1.0 .
+
+
+Chapter-5
+
+Demo of S2I not working with cprogram somtimes got hanged.
+
+New demo
+########
+  git clone https://github.com/anandpavithran/httpserver-builder-image
+  s2i create httpserver-builder-image httpserver-builder-image 
+  cd httpserver-builder-image/
+  sudo podman build -t httpserver-builder-image:1.0 .
+  mkdir test
+  s2i build mysource2 httpserver-builder-image:1.0 myapp:1.0 --as-dockerfile /home/student/test/Dockerfile
+  cd test/
+  sudo podman build -t myapp:1.0 .
+
+
+
+
+output:  curl http://10.88.0.8:3030/opt/app-root/
+
+
+
+
+
+cHECK SIZE REMAINING IN DISK -DF -H.
+
+Chapter4
+Demo of github hook
+
+CHOOSE WEBHOOK FROM LEFT SIDE
+FILL PAY LOAD URL USING VALUES FROM OC DESCRIBE BC-GITHUBHOOK
+CHANGE CONTENTTYPE-APPLICATION/JSON
+FILL SECRET VALUE
+DISABLE SSL
+JUST PUSH
+UPDATE HOOK
+
+IMAGE SEND IN MAIL -SEARCH FOR 
+
+DEMO OF BLUE GREEN AND AB DEPLOYMENT
+###########################
+CREATE TWO DEPLOYMENTS BLUE AND GREEN
+oc expose svc blue --name web --hostname=bg.apps.ocp-ap4.prod.nextcle.com
+oc set route-backends web
+oc set route-backends web blue=90 green=10
+oc set route-backends web
+curl http://bg.apps.ocp-ap4.prod.nextcle.com
+#############################
+
+DEMO OF SCC -SA
+#################
+oc set  serviceaccount deployment/deploymentconfig deployment-name serviceaccount-name
+
+DEMO OF INTERNAL DNS
+####################
+1] DEPLOY THE app using quay.io/anandpavithran/internal-dns:1.0 or github/anandpavithran/openshift-internal-dns-demo
+2] get in to pod
+3] cat /etc/resolv.conf
+4] dig service.project.svc.cluster.local
+
+DEMO OF NETWORK
+###############
+DEFAULT -NETWORKPOLICY
+ oc get -n openshift-network-operator deployment/network-operator
+ oc get clusteroperator/network
+Viewing the cluster network configuration 
+ oc describe network.config/cluster
+ 
+ 
+ Cluster Network Operator example CR
+ #####################################
+ defaultNetwork:
+  type: OpenShiftSDN 
+  openshiftSDNConfig: 
+    mode: NetworkPolicy 
+    mtu: 1450 
+    vxlanPort: 4789  
