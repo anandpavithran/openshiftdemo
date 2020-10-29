@@ -29,6 +29,9 @@ New demo
 
 output:  curl http://10.88.0.8:3030/opt/app-root/
 
+NODEPORT DEMO
+###############
+oc expose dc mysql-80-rhel7 --type=NodePort --name=mysql-ingress
 
 
 
