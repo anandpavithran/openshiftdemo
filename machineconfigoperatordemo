@@ -1,0 +1,11 @@
+oc label node/worker02  node-role.kubernetes.io/anand= # label the node
+oc label node/worker02  node-role.kubernetes.io/infra- # remove the old-label
+oc get node # show the node
+vim motd.txt  # edit motd.txt
+base64 motd.txt # encode
+vim motd-mc.yml  # edit file to add the role
+vim infra-mcp.yml # edit were to apply on which role
+oc create -f infra-mcp.yml 
+oc create -f motd-mc.yml 
+oc get node
+oc debug node/worker02
