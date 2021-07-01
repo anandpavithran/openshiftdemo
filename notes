@@ -98,3 +98,7 @@ oc sa get-token SAACCOUNT-NAME
 TO BUILD ONLY AND SEND TO REGISTRY
 ###################################
 oc new-build GITREPO-URL  --push-secret=secret-name --to-docker --to=quay.io/.................
+
+TO SHOW API
+############
+oc create configmap ANAND --from-literal=LISTEN=8080 --log-level=8
