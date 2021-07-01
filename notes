@@ -89,3 +89,12 @@ Viewing the cluster network configuration
     mode: NetworkPolicy 
     mtu: 1450 
     vxlanPort: 4789  
+
+
+TO CREATE LONG LIVED TOKEN SPECIFIC FOR PROJECT
+################################################
+oc sa get-token SAACCOUNT-NAME
+
+TO BUILD ONLY AND SEND TO REGISTRY
+###################################
+oc new-build GITREPO-URL  --push-secret=secret-name --to-docker --to=quay.io/.................
