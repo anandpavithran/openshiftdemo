@@ -30,3 +30,5 @@ helm upgrade infosys
    helm rollback infosys revisionnumber
 12] Package
 helm package .
+remainigsteps -not tried
+https://medium.com/htc-research-engineering-blog/a-simple-example-for-helm-chart-fbb5c7208e94
