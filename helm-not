@@ -1,0 +1,32 @@
+1] Install helm from my git repo name "helm"
+2] Create helm based application
+helm create infosys
+3] Execute list command to list the folder
+4] Get into directory and use "tree" command
+5] Edit values.yaml file
+image:
+repository: quay.io/anandpavithran/infosys
+pullPolicy: IfNotPresent
+tag: “1.0”
+6] Edit templates/deployment.yaml to add port
+ports:
+- name: http
+containerPort: 8000
+protocol: TCP
+7] if you need to add any dependency open Chart.yaml
+  helm dependency update
+8] oc new-project projectname
+9] Install application
+  helm install infosys .
+  oc get all
+  oc expose svc ----
+  helm list
+  helm history infosys
+10] Upgrade the application
+Edit values.yaml change version
+helm upgrade infosys
+11] Rollback the deployment
+   helm history infosys
+   helm rollback infosys revisionnumber
+12] Package
+helm package .
