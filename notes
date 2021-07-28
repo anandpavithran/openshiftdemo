@@ -102,3 +102,10 @@ oc new-build GITREPO-URL  --push-secret=secret-name --to-docker --to=quay.io/...
 TO SHOW API
 ############
 oc create configmap ANAND --from-literal=LISTEN=8080 --log-level=8
+
+Deploy APPLICATION USING LOCAL DIRECTORY
+#########################################
+1] oc new-build --binary -i php:7.3 --name myphp
+2] oc start-build myphp --from-dir=.
+3] oc new-app myphp
+
