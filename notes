@@ -109,3 +109,9 @@ Deploy APPLICATION USING LOCAL DIRECTORY
 2] oc start-build myphp --from-dir=.
 3] oc new-app myphp
 
+GIT SETTINSG
+#############
+Generate a new token from github's dev settings
+
+git remote set-url origin https://<token>@github.com/<git_url>
+git pull https://<token>@<git_url>.git
