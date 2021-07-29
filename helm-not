@@ -32,4 +32,4 @@ helm upgrade infosys
 helm package .
 remainigsteps -not tried
 https://medium.com/htc-research-engineering-blog/a-simple-example-for-helm-chart-fbb5c7208e94
-HELM REPO- https://artifacthub.io/packages/search?page=1&repo=helm-stable
+HELM REPO- https://artifacthub.io/
