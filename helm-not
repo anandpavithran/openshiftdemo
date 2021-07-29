@@ -30,6 +30,11 @@ helm upgrade infosys
    helm rollback infosys revisionnumber
 12] Package
 helm package .
+helm repo add stable https://charts.helm.sh/stable
+helm repo update
+helm search repo mysql
+helm install name stable/mysql
+
 remainigsteps -not tried
 https://medium.com/htc-research-engineering-blog/a-simple-example-for-helm-chart-fbb5c7208e94
 HELM REPO- https://artifacthub.io/
