@@ -1,0 +1,35 @@
+LOGIN AS ADMIN
+GO TO OPERATOR SECTION
+SEARCH FOR "SERVERLESS"
+INSTALL REDHATOPENSHIFT SERVERLESS"
+WAIT
+CHECK FOR INSTALLED OPERATORS
+WILL SEE REDHATOPENSHIFT SERVERLESS OPERATOR INSTALLED
+IT WILL CREATE PROJECTS LIKE knative-serving ,openshift-serverless..........
+CLICK ON THAT
+IN DETALS SECTION 
+BELOW KNATIVE SERVING
+CLICK ON CREATE INSTANCE
+GO TO KNATIVE SERVICE TAB
+CLICK ON LINK BELOW
+WAIT TILL IT SHOW SREADY
+CREATE A DEMO PROJECT test100-serverless
+Download gto repo https://github.com/anandpavithran/openshift-serverless-demo
+Two ways for deployment
+   1] oc apply -n test100-serverless -f service.yaml  
+   2] [one of the best features of serverless is the ability to deploy and work with serverless resources without ever working with yaml
+       kn service create greeter --image quay.io/rhdevelopers/knative-tutorial-greeter:quarkus --namespace test100-serverless
+       
+   VERIFICATION
+   1] oc get pod
+   2] using kn 
+   kn service list
+   3] using openshift resource
+    oc get -n test100-serverless services.serving.knative.dev
+   4]  kn service describe greeter
+   5] kn route list
+   6] oc get deployment
+   7] ADD REVISON
+     kn service update greeter --image quay.io/rhdevelopers/knative-tutorial-greeter:latest --namespace serverless-tutorial
+     kn revision list
+   8] raise a request using curl command and show pods. after 90 secs immediately it become zero pods again.
