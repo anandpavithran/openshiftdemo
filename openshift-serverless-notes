@@ -33,3 +33,6 @@ Two ways for deployment
      kn service update greeter --image quay.io/rhdevelopers/knative-tutorial-greeter:latest --namespace serverless-tutorial
      kn revision list
    8] raise a request using curl command and show pods. after 90 secs immediately it become zero pods again.
+    9] delete 
+      kn service delete greeter
+      
