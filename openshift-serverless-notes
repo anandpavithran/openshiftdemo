@@ -1,3 +1,9 @@
+The command below executes the curl command 10 times with 5 requests in parallel.
+seq 1 10 | xargs -n1 -P 5 curl -I "https://linuxways.net"
+
+oc edit -n knative-serving edit configmap config-deployment
+oc edit -n knative-serving edit config-autoscaler
+
 LOGIN AS ADMIN
 GO TO OPERATOR SECTION
 SEARCH FOR "SERVERLESS"
