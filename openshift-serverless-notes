@@ -49,6 +49,13 @@ KNATIVE EVENTING DEMO [https://knative.dev/docs/eventing/samples/github-source/]
 3] got folder eventing
 4] Install GitHub Event Source -use github.yaml file
 kubectl apply -f github.yaml
+show camel source [to support camel keventing]- 
+########################################################
+
+Kafka is messaging platform with streaming ability to process messages Apache Kafka. 
+Camel is ETL framework it can transform messages/events/data from "any" (see endpoint list by Camel) input point and send it to "any" output Apache Camel -
+#########################################################
+
 5] Show the resutlt
 kubectl -n knative-sources get pods --selector control-plane=github-controller-manager
 6] create a simple Knative Service that dumps incoming messages to its log
