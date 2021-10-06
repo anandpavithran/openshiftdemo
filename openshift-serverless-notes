@@ -42,7 +42,7 @@ Two ways for deployment
     9] delete 
       kn service delete greeter
       
-KNATIVE EVENTING DEMO
+KNATIVE EVENTING DEMO [https://knative.dev/docs/eventing/samples/github-source/]
 ######################
 1] Start knative venting instances
 2] clone openshift-serverless-demo.
