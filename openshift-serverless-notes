@@ -42,3 +42,28 @@ Two ways for deployment
     9] delete 
       kn service delete greeter
       
+KNATIVE EVENTING DEMO
+######################
+1] Start knative venting instances
+2] clone openshift-serverless-demo.
+3] got folder eventing
+4] Install GitHub Event Source -use github.yaml file
+kubectl apply -f github.yaml
+5] Show the resutlt
+kubectl -n knative-sources get pods --selector control-plane=github-controller-manager
+6] create a simple Knative Service that dumps incoming messages to its log
+create a project.
+oc new-project ---
+kubectl apply --filename service.yaml
+7] Create GitHub Tokens -create secret 
+kubectl apply -f knative-event3.yaml
+8]In order to receive GitHub events, you have to create a concrete Event Source for a specific namespace.
+kubectl --namespace default apply --filename knative-event4.yaml
+9]Verify
+Verify the GitHub webhook was created by looking at the list of webhooks under the Settings tab in your GitHub repository.
+10] Create Events -push,pull to git
+11] kubectl  get pods
+kubectl logs github-event-display-XXXX user-container
+
+
+      
