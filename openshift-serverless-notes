@@ -72,5 +72,6 @@ Verify the GitHub webhook was created by looking at the list of webhooks under t
 11] kubectl  get pods
 kubectl logs github-event-display-XXXX user-container
 
+githubsourcesample-xxx user-container
 
       
