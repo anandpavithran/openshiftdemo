@@ -18,4 +18,5 @@ oc rollout undo deployment/test1
 oc get pod
 oc get replicaset
 curl http://test1-test100.apps.ocp4.example.com
-
+oc rollout history deployment/test1
+oc rollout undo deployment/test1 --to-revision=2
