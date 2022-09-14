@@ -1,0 +1,21 @@
+oc new-project test100
+oc create deployment test1 --image=quay.io/anandpavithran/infosys:2.0
+oc get pod
+oc get all
+oc expose deployment test1 --type="ClusterIP" 
+oc expose deployment test1 --type="ClusterIP" --port 8080
+oc get svc
+oc get all
+oc expose svc test1
+oc get route
+curl http://test1-test100.apps.ocp4.example.com
+oc get pod
+oc set image deployment/test1 infosys=quay.io/anandpavithran/infosys:3.0 #infosys is image name
+oc get pod
+curl http://test1-test100.apps.ocp4.example.com
+oc get replicaset
+oc rollout undo deployment/test1
+oc get pod
+oc get replicaset
+curl http://test1-test100.apps.ocp4.example.com
+
