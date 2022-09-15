@@ -1,0 +1,38 @@
+apiVersion: "logging.openshift.io/v1"
+kind: ClusterLogForwarder
+metadata:
+  name: instance
+  namespace: openshift-logging
+spec:
+  outputs:
+   - name: elasticsearch-insecure
+     type: "elasticsearch"
+     url: http://elasticsearch-insecure.messaging.svc.cluster.local
+     insecure: true
+   - name: elasticsearch-secure
+     type: "elasticsearch"
+     url: https://elasticsearch-secure.messaging.svc.cluster.local
+     secret:
+       name: es-audit
+   - name: secureforward-offcluster
+     type: "fluentdForward"
+     url: https://secureforward.offcluster.com:24224
+     secret:
+       name: secureforward
+  pipelines:
+   - name: container-logs
+     inputRefs:
+     - application
+     outputRefs:
+     - secureforward-offcluster
+   - name: infra-logs
+     inputRefs:
+     - infrastructure
+     outputRefs:
+     - elasticsearch-insecure
+   - name: audit-logs
+     inputRefs:
+     - audit
+     outputRefs:
+     - elasticsearch-secure
+     - default 
