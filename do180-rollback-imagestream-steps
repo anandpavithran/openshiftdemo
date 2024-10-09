@@ -1,0 +1,38 @@
+oc new-project floor-1
+oc create is infosys
+oc edit is infosys 
+oc set image-lookup 
+oc set image-lookup infosys
+oc set image-lookup 
+oc create istag infosys:2.0 --from-image quay.io/anandpavithran/infosys:2.0
+oc create istag infosys:3.0 --from-image quay.io/anandpavithran/infosys:3.0
+oc edit is infosys 
+oc set triggers deployment/test1
+oc create deployment test1 --image infosys:2.0
+oc get pod
+oc edit deployment test1 
+oc get pod
+oc rollout history deployment/test1
+oc annotate deployment/test1 kubernetes.io/change-cause="Image 1"
+oc rollout history deployment/test1
+oc edit deployment test1 
+oc get all
+oc create service clusterip test1 --tcp=8080:8080
+oc expose svc test1
+curl http://test1-floor-1.apps.ocp4.example.com
+oc set triggers deployment/test1
+oc set triggers deployment/test1 --from-image infosys:2.0 --containers infosys --auto
+oc get pod
+oc rollout history deployment/test1
+curl http://test1-floor-1.apps.ocp4.example.com
+vim index.html 
+podman build -t quay.io/anandpavithran/infosys:2.0 .
+podman push quay.io/anandpavithran/infosys:2.0 
+oc get pod
+oc import-image infosys:2.0
+ocg et pod
+oc get pod
+curl http://test1-floor-1.apps.ocp4.example.com
+oc rollout history deployment/test1
+oc annotate deployment/test1 kubernetes.io/change-cause="Image 1-update1"
+oc rollout history deployment/test1
