@@ -1,0 +1,31 @@
+oc new-project floor-1
+ oc login https://api.ocp4.example.com:6443 -u admin  -p redhatocp
+ oc new-project floor-1
+ oc create deployment test1 --image quay.io/anandpavithran/infosys:2.0
+ oc get all
+ oc get is
+ oc create service clusterip test1 --tcp=8080:8080
+ oc expose svc test1
+ oc rollout status deployment/test1
+ oc get pod
+ oc rollout history deployment/test1
+ oc annotate deployment/test1 kubernetes.io/change-cause="Image 1"
+ oc rollout history deployment/test1
+ curl http://test1-floor-1.apps.ocp4.example.com
+ oc get image | grep infosys
+ oc get pod
+ oc describe deployment test1
+ oc describe pod test1-689f967f4c-pbr7v 
+ curl http://test1-floor-1.apps.ocp4.example.com
+ oc get pod
+ oc rollout history deployment/test1
+ oc set image deployment/test1  infosys=quay.io/anandpavithran/infosys:3.0
+ oc get pod
+ curl http://test1-floor-1.apps.ocp4.example.com
+ oc rollout history deployment/test1
+ oc annotate deployment/test1 kubernetes.io/change-cause="Image 2"
+ oc rollout history deployment/test1
+ oc get replicasets.apps 
+ oc rollout undo  deployment/test1 --to-revision=1
+ oc get pod
+ curl http://test1-floor-1.apps.ocp4.example.com
