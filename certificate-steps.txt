@@ -1,0 +1,39 @@
+oc adm groups new backdoor-administrators 
+oc get group
+oc adm policy add-cluster-role-to-group cluster-admin backdoor-administrators
+mkdir my-cert
+cd
+mkdir my-cert
+openssl req -newkey rsa:4096 -nodes -keyout tls.key -subj "/O=myadmin/CN=abbadmin" -out my-cert/myadmin-auth.csr
+ls my-cert/
+ls
+cp tls.key my-cert/
+ls
+cd my-cert/
+ls
+cp ../demo/abbadmin-csr.yml myadmin-csr.yml
+vim myadmin-csr.yml 
+base64 -w0 my-cert/myadmin-auth.csr
+base64 -w0 myadmin-auth.csr
+vim myadmin-csr.yml 
+oc create -f myadmin-csr.yml 
+oc get csr
+oc adm certificate approve myadmin-access
+oc get csr
+cd
+ oc get csr myadmin-access -o jsonpath='{.status.certificate}' | base64 -d > my-cert/myadmin-access.crt
+ls my-cert/
+cat my-cert/myadmin-access.crt 
+vim .kube/config 
+vim auth/kubeconfig
+oc config set-credentials myadmin --client-certificate my-cert/myadmin-access.crt --client-key tls.key --embed-certs --kubeconfig my-cert/myadmin.config
+ls my-cert/
+vim my-cert/myadmin.config 
+openssl s_client -showcerts -connect api.ocp4.example.com:6443 </dev/null 2>/dev/null|openssl x509 -outform PEM > ocp-apiserver-cert.crt
+ls
+cp ocp-apiserver-cert.crt my-cert/
+oc config set-cluster $(oc config view -o jsonpath='{.clusters[0].name}') --certificate-authority ocp-apiserver-cert.crt --embed-certs=true --server https://api.ocp4.example.com:6443 --kubeconfig my-cert/myadmin.config
+vim my-cert/myadmin.config 
+oc config set-context myadmin --cluster $(oc config view -o jsonpath='{.clusters[0].name}') --namespace default --user myadmin --kubeconfig my-cert/myadmin.config
+oc config use-context myadmin --kubeconfig my-cert/myadmin.config
+oc whoami --kubeconfig my-cert/myadmin.config 
